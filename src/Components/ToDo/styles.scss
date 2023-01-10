@@ -1,0 +1,23 @@
+#todo-container {
+  width: 950px;
+  margin: auto;
+  display: flex;
+  flex-direction:row;
+  gap: 30px;
+  form {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    padding: 15px;
+    gap: 10px;
+    height: 300px;
+    h2 {
+      margin:0px;
+    }
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  
+}
