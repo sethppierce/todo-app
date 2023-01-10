@@ -1,11 +1,19 @@
-import React from 'react';
-
+import React, {useState} from 'react';
+import Footer from './Components/Footer/Footer';
+import Header from './Components/Header/Header';
+import Nav from './Components/nav/Nav';
 import ToDo from './Components/ToDo/ToDo';
 
-export default class App extends React.Component {
-  render() {
+const App = () => {
+  const [incomplete, setIncomplete] = useState([]);
     return (
-      <ToDo />
+      <>
+        <Nav/>
+        <Header incomplete={incomplete}/>
+        <ToDo setIncomplete={setIncomplete} incomplete={incomplete}/>
+        <Footer/>
+      </>
     );
-  }
 }
+
+export default App

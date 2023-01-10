@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
 
 import { v4 as uuid } from 'uuid';
+import List from '../List/List';
+import './styles.scss'
 
-const ToDo = () => {
+const ToDo = (props) => {
 
   const [defaultValues] = useState({
     difficulty: 4,
   });
   const [list, setList] = useState([]);
-  const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+  const {setIncomplete} = props;
+  const {incomplete} = props
 
   function addItem(item) {
     item.id = uuid();
@@ -19,10 +22,10 @@ const ToDo = () => {
     setList([...list, item]);
   }
 
-  function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
-    setList(items);
-  }
+  // function deleteItem(id) {
+  //   const items = list.filter( item => item.id !== id );
+  //   setList(items);
+  // }
 
   function toggleComplete(id) {
 
@@ -47,11 +50,7 @@ const ToDo = () => {
   }, [list]);  
 
   return (
-    <>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
-      </header>
-
+    <div id='todo-container'>
       <form onSubmit={handleSubmit}>
 
         <h2>Add To Do Item</h2>
@@ -76,17 +75,9 @@ const ToDo = () => {
         </label>
       </form>
 
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
+      <List items={list} toggleComplete={toggleComplete}/>
 
-    </>
+    </div>
   );
 };
 
