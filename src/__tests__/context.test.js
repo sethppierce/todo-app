@@ -24,7 +24,7 @@ describe('Settings Context', () => {
     const hide = screen.getByTestId('hide-test');
     const sortBy = screen.getByTestId('sortBy-test');
     expect(display).toHaveTextContent('test: 3');
-    expect(hide).toHaveTextContent('test: true');
+    expect(hide).toHaveTextContent('test: false');
     expect(sortBy).toHaveTextContent('test: difficulty');
   });  
 });

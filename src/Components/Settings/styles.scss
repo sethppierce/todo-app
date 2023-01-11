@@ -1,0 +1,41 @@
+#settings-header {
+  display: flex;
+  margin-top: 21px;
+  padding-left: 30px;
+  height: 100px;
+  svg{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  h1{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+#settings-container {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  margin-top: 30px;
+  gap: 2rem;
+  #updateCard {
+    gap: 15px;
+    width: 45%;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  h2 {
+    margin:0px;
+  }
+}
+}
+#settingsCard {
+  width: 50%;
+  height: 30%;
+  padding-right: 0px;
+  h2{
+    margin-top: 0px;
+  }
+}
