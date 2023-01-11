@@ -9,7 +9,7 @@ const List = (props) => {
   const {items} = props;
   const startIndex = (currentPage - 1) * displayed;
   const endIndex = startIndex + displayed;
-  const itemsToShow = hide ? items.slice(startIndex, endIndex).filter((item) => !item.complete) : items.slice(startIndex, endIndex)
+  const itemsToShow = hide ? items.slice(startIndex, endIndex) : items.slice(startIndex, endIndex).filter((item) => !item.complete)
   const {toggleComplete} = props;
   return (
     <div id='list-contain'>

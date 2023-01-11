@@ -33,6 +33,8 @@ The useForm hook is a function that returns a form state object and a set of fun
 
 Currently, a user can add todo tasks to the proof-of-life starter application. In this phase, we will add hard-wired, default context settings to the application so that the user can view three incomplete todo tasks. In addition, the user will have the option of viewing any additional incomplete tasks by using pagination functionality.
 
+Settings editor to allow users to change preferences for the application.
+
 #### Tests
 
 - npm test
@@ -41,10 +43,19 @@ Currently, a user can add todo tasks to the proof-of-life starter application. I
 - list
   - tests to see if the correct amount of items are displayed based off of the setting context
 - settings
-  - tests settingsContext to see if it initializes 
+  - test if preferences form initializes
+  - test if preferences form changes values
+  - test if updated settings card is not rendered when loaded
+  - test if updated settings card is rendered when form is submitted
+- context
+  - tests settingsContext to see if it initializes context properly
 
 ### UML
 
 #### Phase 1 UML
 
 ![UML](./src/assets/Lab-31.png)
+
+#### Phase 2 UML
+
+![UML](./src/assets/Lab-32.png)
