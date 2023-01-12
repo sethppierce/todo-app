@@ -35,6 +35,8 @@ Currently, a user can add todo tasks to the proof-of-life starter application. I
 
 Settings editor to allow users to change preferences for the application.
 
+In this final phase, we’ll be requiring that users be logged in, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them.
+
 #### Tests
 
 - npm test
@@ -49,6 +51,10 @@ Settings editor to allow users to change preferences for the application.
   - test if updated settings card is rendered when form is submitted
 - context
   - tests settingsContext to see if it initializes context properly
+  - tests authcontext to see if it initializes context properly
+- nav
+  - tests to see if login form is rendered intitially
+  - tests to see if logout button is rendered after user logs in
 
 ### UML
 
@@ -59,3 +65,7 @@ Settings editor to allow users to change preferences for the application.
 #### Phase 2 UML
 
 ![UML](./src/assets/Lab-32.png)
+
+#### Phase 3 UML
+
+![UML](./src/assets/Lab-33.png)

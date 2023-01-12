@@ -1,8 +1,41 @@
 #list-contain {
   display: flex;
   flex-direction: column;
-  div {
-    width: 700px;
-    
+  gap: 13px;
+  width: 70%;
+  height: 100%;
+}
+
+#list-card {
+  height: 30%;
+}
+
+#list-assign {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+#list-group {
+  padding-inline: 5px;
+
+}
+
+.list-button {
+  margin-right: 10px;
+  width: 40%;
+}
+
+#list-bottom {
+  padding:10px;
+  height: 70%;
+  :nth-child(odd){
+    margin-top: 0px;
+    font-size: 1.5rem;
+  }
+  :nth-child(even){
+    margin-bottom: 0px;
+    font-size: 1rem;
   }
 }
+
