@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect'
 import Settings from '../Components/Settings/Settings'
 import SettingsProvider, { SettingsContext } from '../Context/Settings/Settings.jsx';
 
-
+jest.unmock('axios')
 describe('List', () => {
   test('it should display the current settings', () => {
     render(

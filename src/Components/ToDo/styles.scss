@@ -1,24 +1,35 @@
 #todo-container {
-  width: 950px;
+  width: 50%;
   margin: auto;
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   gap: 30px;
-  #todoCard{
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
+
+  #todoCard {
     gap: 15px;
     width: 35%;
     height: max-content;
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    h2 {
+      margin: 0px;
+    }
   }
-  h2 {
-    margin:0px;
-  }
-}
 }
 
-#slider-label{
+#slider-label {
   font-weight: 500;
 }

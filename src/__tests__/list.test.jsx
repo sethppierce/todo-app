@@ -5,7 +5,7 @@ import SettingsProvider, {SettingsContext} from '../Context/Settings/Settings.js
 import AuthProvider from '../Context/Auth/index.jsx';
 
 const toggleComplete = jest.fn();
-
+jest.unmock('axios')
 
 describe('List', () => {
   const items = [

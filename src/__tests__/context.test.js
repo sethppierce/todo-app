@@ -3,6 +3,15 @@ import { screen, render } from '@testing-library/react';
 import SettingsProvider, { SettingsContext } from '../Context/Settings/Settings';
 import AuthProvider, { AuthContext } from '../Context/Auth/';
 
+jest.mock('axios', () => {
+  return {
+    get: jest.fn(() => Promise.resolve({ data: {} })),
+    post: jest.fn(() => Promise.resolve({ data: {} })),
+    put: jest.fn(() => Promise.resolve({ data: {} })),
+    delete: jest.fn(() => Promise.resolve({ data: {} }))
+  };
+});
+
 describe('Context Providers', () => {
   test('Settings Context provides initial state', () => {
     render(
