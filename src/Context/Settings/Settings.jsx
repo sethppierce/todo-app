@@ -20,10 +20,11 @@ const SettingsProvider = ({ children }) => {
   useEffect(() => {
     const pref = JSON.parse(localStorage.getItem('pref'))
     if(pref){
-      setHide(pref.head)
+      setHide(pref.hide)
       setDisplayed(pref.displayed)
       setSortBy(pref.sortBy)
     }
+    console.log(pref)
   },[])
   
   return (

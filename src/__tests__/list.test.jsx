@@ -2,8 +2,10 @@ import { screen, render } from '@testing-library/react';
 import List from '../Components/List/List.jsx'
 import '@testing-library/jest-dom';
 import SettingsProvider, {SettingsContext} from '../Context/Settings/Settings.jsx';
+import AuthProvider from '../Context/Auth/index.jsx';
 
 const toggleComplete = jest.fn();
+
 
 describe('List', () => {
   const items = [
@@ -19,7 +21,9 @@ describe('List', () => {
 
     render(
     <SettingsProvider>
-      <List items={items} toggleComplete={toggleComplete} /> 
+      <AuthProvider>
+        <List items={items} toggleComplete={toggleComplete} /> 
+      </AuthProvider>
     </SettingsProvider>);
     const renderedItems = screen.getAllByTestId('list-item');
     expect(renderedItems).toHaveLength(3);

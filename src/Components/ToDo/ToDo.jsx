@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
-
+import { TextInput, Card, Slider, Button } from '@mantine/core';
 import { v4 as uuid } from 'uuid';
 import List from '../List/List';
 import './styles.scss'
+import Auth from '../Auth/index.jsx';
 
 const ToDo = (props) => {
 
@@ -12,8 +13,8 @@ const ToDo = (props) => {
   });
   const [list, setList] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
-  const {setIncomplete} = props;
-  const {incomplete} = props
+  const { setIncomplete } = props;
+  const { incomplete } = props
 
   function addItem(item) {
     item.id = uuid();
@@ -22,16 +23,16 @@ const ToDo = (props) => {
     setList([...list, item]);
   }
 
-  // function deleteItem(id) {
-  //   const items = list.filter( item => item.id !== id );
-  //   setList(items);
-  // }
+  function deleteItem(id) {
+    const items = list.filter(item => item.id !== id);
+    setList(items);
+  }
 
   function toggleComplete(id) {
 
-    const items = list.map( item => {
-      if ( item.id === id ) {
-        item.complete = ! item.complete;
+    const items = list.map(item => {
+      if (item.id === id) {
+        item.complete = !item.complete;
       }
       return item;
     });
@@ -44,38 +45,55 @@ const ToDo = (props) => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
-    // linter will want 'incomplete' added to dependency array unnecessarily. 
-    // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [list]);  
+  }, [list]);
 
   return (
     <div id='todo-container'>
-      <form onSubmit={handleSubmit}>
+      <Auth capability='create'>
+        <Card p="lg" radius="md" withBorder id='todoCard'>
+          <form onSubmit={handleSubmit}>
 
-        <h2>Add To Do Item</h2>
+            <h2>Add To Do Item</h2>
 
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
+            <label>
+              <TextInput
+                placeholder="Item Details"
+                label="To Do Item"
+                name="text"
+                size="md"
+                onChange={handleChange}
+                withAsterisk
+              />
+            </label>
 
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
+            <label>
+              <TextInput
+                placeholder="Asignee Name"
+                label="Assigned To"
+                name="assignee"
+                size="md"
+                onChange={handleChange}
+                withAsterisk
+              />
+            </label>
 
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
+            <label>
+              <span id='slider-label'>Difficulty</span>
+              <Slider onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
+            </label>
 
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
+            <label>
+              <Button size="md" type="submit">
+                Add Item
+              </Button>
+            </label>
+          </form>
+        </Card>
 
-      <List items={list} toggleComplete={toggleComplete}/>
+      </Auth>
+
+      <List items={list} toggleComplete={toggleComplete} deleteItem={deleteItem} />
 
     </div>
   );
