@@ -16,18 +16,19 @@ const List = (props) => {
   const endIndex = startIndex + displayed;
   const itemsToShow = hide ? items.slice(startIndex, endIndex) : items.slice(startIndex, endIndex).filter((item) => !item.complete)
   const { toggleComplete, deleteItem } = props;
+  console.log(itemsToShow)
   return (
     <Auth capability='read'>
       <div id='list-contain'>
         {itemsToShow.map(item => (
-          <Card id='list-card' p="lg" radius="md" shadow="sm" withBorder key={item.id} data-testid="list-item">
+          <Card id='list-card' p="lg" radius="md" shadow="sm" withBorder key={item._id} data-testid="list-item">
             <Card.Section>
               <Group position="apart" id='list-group'>
                 <div id='list-assign'>
                   <Auth capability="update">
-                    {!item.complete ? <Button className='list-button' color="green" radius="xl" size="md" compact onClick={() => toggleComplete(item.id)}>
+                    {!item.complete ? <Button className='list-button' color="green" radius="xl" size="md" compact onClick={() => toggleComplete(item._id)}>
                       Pending
-                    </Button> : <Button className='list-button' color="red" radius="xl" size="md" compact onClick={() => toggleComplete(item.id)}>
+                    </Button> : <Button className='list-button' color="red" radius="xl" size="md" compact onClick={() => toggleComplete(item._id)}>
                       Complete
                     </Button>}
                   </Auth>
@@ -41,7 +42,7 @@ const List = (props) => {
                   <p>{item.assignee}</p>
                 </div>
                 <Auth capability='delete'>
-                  <CloseButton onClick={() => deleteItem(item.id)} />
+                  <CloseButton onClick={() => deleteItem(item._id)} />
                 </Auth>
               </Group>
             </Card.Section>

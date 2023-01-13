@@ -6,6 +6,14 @@ import AuthProvider, {AuthContext} from '../Context/Auth/index.jsx';
 import Nav from '../Components/nav/Nav.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
+jest.mock('axios', () => {
+  return {
+    get: jest.fn(() => Promise.resolve({ data: {} })),
+    post: jest.fn(() => Promise.resolve({ data: {} })),
+    put: jest.fn(() => Promise.resolve({ data: {} })),
+    delete: jest.fn(() => Promise.resolve({ data: {} }))
+  };
+});
 describe('Nav', () => {
   test('renders login form when not logged in', () => {
     render(

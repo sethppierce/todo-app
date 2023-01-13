@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
 import { TextInput, Card, Slider, Button } from '@mantine/core';
-import { v4 as uuid } from 'uuid';
 import List from '../List/List';
 import './styles.scss'
 import Auth from '../Auth/index.jsx';
+import axios from 'axios';
 
 const ToDo = (props) => {
 
@@ -16,37 +16,63 @@ const ToDo = (props) => {
   const { setIncomplete } = props;
   const { incomplete } = props
 
-  function addItem(item) {
-    item.id = uuid();
+  async function addItem(item) {
     item.complete = false;
-    console.log(item);
-    setList([...list, item]);
+    try {
+      const response = await axios.post('https://api-js401.herokuapp.com/api/v1/todo', item);
+      console.log(response);
+      setList([...list, response.data]);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  function deleteItem(id) {
-    const items = list.filter(item => item.id !== id);
-    setList(items);
+  async function deleteItem(itemId) {
+    try {
+      await axios.delete(`https://api-js401.herokuapp.com/api/v1/todo/${itemId}`);
+      setList(list.filter(item => item._id !== itemId));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  function toggleComplete(id) {
-
-    const items = list.map(item => {
-      if (item.id === id) {
-        item.complete = !item.complete;
-      }
-      return item;
-    });
-
-    setList(items);
-
+  async function toggleComplete(id) {
+    try {
+      let item = list.find(item => item._id === id)
+      item.complete = !item.complete
+      const response = await axios.put(`https://api-js401.herokuapp.com/api/v1/todo/${id}`, item );
+      const items = list.map(item => {
+        if (item._id === id) {
+          item.complete = response.data.results.complete;
+        }
+        return item;
+      });
+      setList(items);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   useEffect(() => {
+    console.log(list)
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [list]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get('https://api-js401.herokuapp.com/api/v1/todo');
+        console.log(response.data.results)
+        setList(response.data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div id='todo-container'>
